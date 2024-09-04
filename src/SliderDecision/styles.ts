@@ -1,0 +1,55 @@
+import { StyleSheet } from "react-native";
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    justifyContent: "flex-end",
+  },
+  background: {
+    position: "absolute",
+    backgroundColor: "#202024",
+    opacity: 0.4,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  },
+  sliderContent: {
+    maxHeight: 380,
+    minHeight: 380,
+    flex: 1,
+    backgroundColor: "red",
+  },
+  feedback: {
+    position: "absolute",
+    backgroundColor: "#202024",
+    opacity: 0.4,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  },
+  feedbackButton: {
+    position: "absolute",
+    top: "50%",
+    right: 0,
+    left: 0,
+    bottom: 0,
+    maxHeight: 50,
+    minHeight: 50,
+    width: "100%",
+    maxWidth: 140,
+    borderRadius: 100,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "green",
+  },
+  feedbackButtonText: {
+    color: "#ffffff",
+  },
+});
