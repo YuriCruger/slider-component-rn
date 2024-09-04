@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 
 import { styles } from "./styles";
-import { BaseballHelmet, MapPin, Target } from "phosphor-react-native";
+// import { BaseballHelmet, MapPin, Target } from "phosphor-react-native";
 
 export function CollectCard() {
   return (
@@ -23,15 +23,15 @@ export function CollectCard() {
 
       <View style={styles.secondGroup}>
         <View style={styles.iconTextRow}>
-          {/* <BaseballHelmet size={24} /> */}
+          {/* <BaseballHelmet size={24} /> ESSES ICONES ESTÃO CAUSANDO BUG NO APP  */}
           <Text>Código da entrada #123456</Text>
         </View>
 
         <View style={styles.iconTextRow}>
           <View style={styles.iconsContainer}>
-            {/* <MapPin size={24} /> */}
+            {/* <MapPin size={24} /> ESSES ICONES ESTÃO CAUSANDO BUG NO APP */}
             <View style={styles.tracer} />
-            {/* <Target size={24} /> */}
+            {/* <Target size={24} /> ESSES ICONES ESTÃO CAUSANDO BUG NO APP */}
           </View>
 
           <View>
