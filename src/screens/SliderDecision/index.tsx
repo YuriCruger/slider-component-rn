@@ -10,10 +10,10 @@ import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
 import { styles } from "./styles";
 
-import { CollectCard } from "../components/CollectCard";
-import { Tips } from "../components/Tips";
-import { FeedbackButton } from "../components/FeedbackButton";
-import { StatusDelivery } from "../components/StatusDelivery";
+import { CollectCard } from "../../components/CollectCard";
+import { Tips } from "../../components/Tips";
+import { FeedbackButton } from "../../components/FeedbackButton";
+import { StatusDelivery } from "../../components/StatusDelivery";
 
 const WINDOW_WIDTH = Dimensions.get("window").width;
 const CARD_SKIP_AREA = WINDOW_WIDTH / 2;

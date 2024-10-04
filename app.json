@@ -19,7 +19,12 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.yuricruger.sliderdecision"
+      "package": "com.yuricruger.sliderdecision",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyD5RLV8Gp3aDwtS2edK2eNl9Nldkm08dRk"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
