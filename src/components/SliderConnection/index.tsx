@@ -30,8 +30,12 @@ export function SliderConnection({
   onDisconnect,
   onHome,
 }: SliderConnectionProps) {
-  const dragPosition = useSharedValue(0);
-  // const backgroundOpacity = useSharedValue(1);
+  const INITAL_DRAG_POSITION_VALUE = isConnected ? MAX_TRANSLATION_X : 0;
+  const INITAL_MASK_POSITION_VALUE = isConnected
+    ? MAX_TRANSLATION_X
+    : -MAX_TRANSLATION_X;
+  const dragPosition = useSharedValue(INITAL_DRAG_POSITION_VALUE);
+  const maskPosition = useSharedValue(INITAL_MASK_POSITION_VALUE);
 
   const onPan = Gesture.Pan()
     .onUpdate((event) => {
@@ -44,10 +48,7 @@ export function SliderConnection({
 
       if (!isConnected && rightGesture) {
         dragPosition.value = Math.min(event.translationX, MAX_TRANSLATION_X);
-        // backgroundOpacity.value = Math.max(
-        //   0.85,
-        //   1 - event.translationX / MAX_TRANSLATION_X
-        // );
+        maskPosition.value = -MAX_TRANSLATION_X + dragPosition.value;
       }
 
       if (isConnected && leftGesture) {
@@ -55,10 +56,7 @@ export function SliderConnection({
           0,
           MAX_TRANSLATION_X + event.translationX
         );
-        // backgroundOpacity.value = Math.max(
-        //   0.85,
-        //   1 - (event.translationX * -1) / MAX_TRANSLATION_X
-        // );
+        maskPosition.value = dragPosition.value;
       }
     })
     .onEnd((event) => {
@@ -68,25 +66,31 @@ export function SliderConnection({
       const rightGesture = event.translationX > 0;
       const leftGesture = event.translationX < 0;
 
+      if (onHome && isConnected) {
+        return;
+      }
+
       if (rightGesture && !rightLimit && !isConnected) {
         dragPosition.value = withTiming(0);
+        maskPosition.value = withTiming(-MAX_TRANSLATION_X);
       }
 
       if (leftGesture && !leftLimit && isConnected) {
         dragPosition.value = withTiming(MAX_TRANSLATION_X);
+        maskPosition.value = withTiming(MAX_TRANSLATION_X);
       }
 
       if (rightLimit && !isConnected) {
         dragPosition.value = withTiming(MAX_TRANSLATION_X);
+        maskPosition.value = withTiming(MAX_TRANSLATION_X);
         runOnJS(onConnect)();
       }
 
       if (leftLimit && isConnected) {
         dragPosition.value = withTiming(0);
+        maskPosition.value = withTiming(-MAX_TRANSLATION_X);
         runOnJS(onDisconnect)();
       }
-
-      // backgroundOpacity.value = withTiming(1);
     });
 
   const dragStyles = useAnimatedStyle(() => {
@@ -95,18 +99,9 @@ export function SliderConnection({
     };
   });
 
-  // const backgroundButtonStyles = useAnimatedStyle(() => {
-  //   const opacity = backgroundOpacity.value;
-
-  //   return {
-  //     opacity: withTiming(opacity, { duration: 100 }),
-  //   };
-  // });
-
   const maskStyles = useAnimatedStyle(() => {
     return {
-      transform: [{ translateX: dragPosition.value }],
-      left: -MAX_TRANSLATION_X,
+      transform: [{ translateX: maskPosition.value }],
     };
   });
 
@@ -135,18 +130,16 @@ export function SliderConnection({
       </GestureDetector>
       {isConnected ? (
         onHome ? (
-          <Text style={[styles.message, styles.connectedMessage]}>
-            Você se conectou!
-          </Text>
+          <Text style={[styles.message]}>Você se conectou!</Text>
         ) : (
-          <Text style={[styles.message, styles.disconnectMessage]}>
+          <Animated.Text style={[styles.message, styles.disconnectMessage]}>
             {"<<"} Deslize o botão para desconectar-se
-          </Text>
+          </Animated.Text>
         )
       ) : (
-        <Text style={[styles.message, styles.connectMessage]}>
+        <Animated.Text style={[styles.message, styles.connectMessage]}>
           Deslize o botão para conectar-se {">>"}
-        </Text>
+        </Animated.Text>
       )}
     </View>
   );

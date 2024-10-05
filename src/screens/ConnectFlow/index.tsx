@@ -8,9 +8,13 @@ import { Map } from "../../components/Map";
 import { AlertCard } from "../../components/AlertCard";
 import MapView from "react-native-maps";
 import { SliderConnection } from "../../components/SliderConnection";
+import { BottomSheet } from "../../components/BottomSheet";
 
 export function ConnectFlow() {
   const [isConnected, setIsConnected] = useState(false);
+  const [hideSlider, setHideSlider] = useState(false);
+  const [showBottomSheet, setShowBottomSheet] = useState(false);
+
   const mapRef = useRef<MapView>(null);
 
   const handleCentralizeMap = () => {
@@ -29,6 +33,10 @@ export function ConnectFlow() {
 
   function handleConnect() {
     setIsConnected(true);
+    setTimeout(() => {
+      setHideSlider(true);
+      setShowBottomSheet(true);
+    }, 1000);
   }
 
   function handleDisconnect() {
@@ -56,15 +64,26 @@ export function ConnectFlow() {
           <Bell size={24} />
         </Pressable>
 
-        {!isConnected && <AlertCard />}
+        {!isConnected && (
+          <AlertCard
+            featherIconName="alert-circle"
+            title="Você está desconectado."
+            description="Conecte-se para começar a receber nossas entregas."
+            iconColor="#676767"
+          />
+        )}
 
-        <SliderConnection
-          // onHome
-          isConnected={isConnected}
-          onConnect={handleConnect}
-          onDisconnect={handleDisconnect}
-        />
+        {hideSlider ? null : (
+          <SliderConnection
+            onHome
+            isConnected={isConnected}
+            onConnect={handleConnect}
+            onDisconnect={handleDisconnect}
+          />
+        )}
       </View>
+
+      {showBottomSheet && <BottomSheet />}
     </View>
   );
 }

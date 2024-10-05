@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
     padding: 12,
     borderWidth: 1,
     borderColor: "#F1B304",
-    marginBottom: 16,
   },
   textBold: {
     fontWeight: "700",

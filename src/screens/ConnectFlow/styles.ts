@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
     margin: 32,
     justifyContent: "flex-end",
     position: "relative",
+    gap: 16,
   },
   map: {
     width: "100%",

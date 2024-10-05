@@ -22,18 +22,19 @@ export const styles = StyleSheet.create({
   },
   message: {
     color: "#fff",
-    position: "absolute",
+    textAlign: "center",
+    flex: 1,
+    flexWrap: "wrap",
   },
   disconnectMessage: {
-    right: 80,
+    marginRight: 70,
   },
   connectMessage: {
-    left: 80,
-  },
-  connectedMessage: {
-    right: 80,
+    marginLeft: 70,
   },
   draggeble: {
+    position: "absolute",
+    left: 6,
     backgroundColor: "#ffffff",
     height: 68,
     width: 68,
@@ -46,6 +47,7 @@ export const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     right: 0,
+    left: 0,
     bottom: 0,
     backgroundColor: "#202024",
     borderRadius: 100,
